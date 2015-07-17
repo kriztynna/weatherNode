@@ -2,8 +2,8 @@ var http = require("http");
 var https = require("https");
 var keys = require("./keys.js");
 
-function printMessage(placeName, summary, precipProb){
-  var message = placeName+': '+summary+" day with "+precipProb+"% probability of precipitation."
+function printMessage(placeName, summary, temp, feelsLike){
+  var message = placeName+': '+summary+". Temperature is "+temp+" degrees F, feels like "+feelsLike+"."
   console.log(message)
 }
 
@@ -63,7 +63,7 @@ function getForecast(coords,placeName){
 					if (response.statusCode === 200) {
 						try {
 							var outlook = JSON.parse(body);
-							printMessage(placeName,outlook.currently.summary, outlook.currently.precipProbability);
+							printMessage(placeName,outlook.currently.summary, outlook.currently.temperature, outlook.currently.apparentTemperature);
 						} catch(error) {
 							printError(error);
 						}
