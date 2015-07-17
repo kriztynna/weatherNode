@@ -2,8 +2,8 @@ var http = require("http");
 var https = require("https");
 var keys = require("./keys.js");
 
-function printMessage(summary, precipProb){
-  var message = summary+" day with "+precipProb+"% probability of precipitation."
+function printMessage(placeName, summary, precipProb){
+  var message = placeName+': '+summary+" day with "+precipProb+"% probability of precipitation."
   console.log(message)
 }
 
@@ -33,8 +33,9 @@ function getCoords(postalCode) {
 					if (response.statusCode === 200) {
 						try {
 							var info = JSON.parse(body);
-							var coords = info.postalcodes[0].lat+','+info.postalcodes[0].lng;
-							getForecast(coords);
+							var coords = info.postalcodes[0].lat+','+info.postalcodes[0].lng
+							var placeName=info.postalcodes[0].placeName;
+							getForecast(coords,placeName);
 						} catch(error) {
 							printError(error);
 						}
@@ -47,7 +48,7 @@ function getCoords(postalCode) {
 		})
 }
 
-function getForecast(coords){
+function getForecast(coords,placeName){
 	var URI = 'https://api.forecast.io/forecast/'+keys.APIKEY+'/'+coords;
 	var request = https.get(
 		URI, 
@@ -62,7 +63,7 @@ function getForecast(coords){
 					if (response.statusCode === 200) {
 						try {
 							var outlook = JSON.parse(body);
-							printMessage(outlook.currently.summary, outlook.currently.precipProbability);
+							printMessage(placeName,outlook.currently.summary, outlook.currently.precipProbability);
 						} catch(error) {
 							printError(error);
 						}
