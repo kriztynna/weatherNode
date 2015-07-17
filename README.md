@@ -16,5 +16,11 @@ You can get these keys for free (with reasonable usage limits) at
 # Using weatherNode
 Request the forecast for any ZIP code by navigating to the weatherNode directory in your command line, then entering "node forecast.js" followed by the ZIP code of your choice. For example: 
 
-    node forecast.js 10021
+    node forecast.js 90210
 
+If you pass multiple ZIP codes as arguments, weatherNode will return a forecast for each.
+
+    node forecast.js 10001 48222
+
+
+*Fun fact: The 48222 ZIP belongs to a floating post office and its ship addressees: [J. W. Westcott II on Wikipedia](https://en.wikipedia.org/wiki/J._W._Westcott_II)*
