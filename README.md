@@ -11,7 +11,7 @@ weatherNode requires a **keys.js** file that is .gitignore'd. Your copy of weath
 
 You can get these keys for free (with reasonable usage limits) at
 * GeoNames: http://www.geonames.org/login
-* Forecast.io: 
+* Forecast.io: https://developer.forecast.io/register
 
 # Using weatherNode
 Request the forecast for any ZIP code by navigating to the weatherNode directory in your command line, then entering "node forecast.js" followed by the ZIP code of your choice. For example: 
