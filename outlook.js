@@ -12,13 +12,19 @@ function printError(error) {
 }
 
 function getCoords(postalCode) {
+  if(!keys.geonamesUser){
+
+    printError({message: 'Invalid Geonames username'});
+    process.exit(1);
+  }
+
 	var postalCode = postalCode;
 	/*
-	 * This implementation supports only US for now, but it could be modified to 
-	 * accept a countryCode input by user. 
+	 * This implementation supports only US for now, but it could be modified to
+	 * accept a countryCode input by user.
 	 * The geonames.org API supports a number of other countries.
 	 */
-	var countryCode = 'US'; 
+	var countryCode = 'US';
 	var URI = 'http://api.geonames.org/postalCodeLookupJSON?postalcode='+postalCode+'&country='+countryCode+'&username='+keys.geonamesUser;
 	var request = http.get(
 		URI,
@@ -49,16 +55,23 @@ function getCoords(postalCode) {
 }
 
 function getForecast(coords,placeName){
+
+  if(!keys.APIKEY){
+
+    printError({message: 'Invalid Forecast API key'});
+    process.exit(1);
+  }
+
 	var URI = 'https://api.forecast.io/forecast/'+keys.APIKEY+'/'+coords;
 	var request = https.get(
-		URI, 
+		URI,
 		function(response){
 			var body="";
-			response.on('data', 
+			response.on('data',
 				function(chunk){
 					body+=chunk;
 				});
-			response.on('end', 
+			response.on('end',
 				function(){
 					if (response.statusCode === 200) {
 						try {
