@@ -1,7 +1,12 @@
 weatherNode is a command line application for Node.js that displays the current day's weather foreast for a given ZIP code. It uses the [Forecast.io](http://forecast.io/) and [GeoNames](http://www.geonames.org/) APIs to fetch the current day's forecast for a given zipcode.
 
 # Set up your API keys before running weatherNode
-weatherNode requires a **keys.js** file that is .gitignore'd. Your copy of weatherNode will require you to add a **keys.js** file containing your own API keys. The contents should look like so:
+You can add the keys by running 
+
+    node setup.js
+
+and then entering the keys when prompted. Alternatively, you can enter the keys
+manually by creating a **keys.js** file containing your own API keys. The contents should look like so:
 
     var APIKEY = 'yourKeyHere'
     var geonamesUser = 'yourUsernameHere';
